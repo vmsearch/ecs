@@ -1,0 +1,18 @@
+{%extends "search/base.html"%}
+{%block main%}
+<div class="content">
+    <h2 class="under_line">
+        <span> {{bug.title}} </span>
+    </h2>
+    <div class="page-header">
+        <span> 跟踪者: {{bug.owner}}
+        |状态:{{bug.status}}
+        |来源:{{bug.url}} </span>
+        
+    </div>
+    <br>
+    <div class="panel">
+    <p class="text-info">{{bug.info}} </p>
+    </div>
+</div>
+{%endblock%}

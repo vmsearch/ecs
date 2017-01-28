@@ -1,0 +1,46 @@
+{% extends "search/base.html" %}
+<style type="text/css">
+div.highlight_me_please {
+     color:red
+}
+</style>
+<tr>
+    <tr>
+{%block search%}
+<div class="page-header">
+<p style="text-align:center">
+<h1>buginfo search </h1>
+</p>
+</div>
+       <form class="form-inline" role="form" method="get" action=".">  
+            {{ form}}
+       <input type="submit" value="Search" class=" btn btn-primary">
+  
+    {% if query %}  
+        <h3>Results</h3>  
+  
+        {% for result in page.object_list %}
+         <div class="panel container">
+           <a href = {{ result.object.get_absolute_url }} target="_blank" ><h3>{{ result.object.title|safe }}</h3></a>
+           <p id="r_link">{{ result.object.info|truncatewords:30 }}</p>
+        </div>
+
+        {% empty %}  
+            <p>No results found.</p>  
+        {% endfor %}  
+  
+        {% if page.has_previous or page.has_next %}  
+            <div>  
+                {% if page.has_previous %}<a href="?q={{ query }}&page={{ page.previous_page_number }}">{% endif %} Previous{% if page.has_previous %}</a>{% endif %}  
+                |  
+                {% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}">{% endif %}Next{% if page.has_next %}</a>{% endif %}  
+            </div>  
+        {% endif %}  
+    {% else %}  
+        {# Show some example queries to run, maybe query syntax, something else? #}  
+    {% endif %}
+
+</form>
+{%endblock%}
+  
+
